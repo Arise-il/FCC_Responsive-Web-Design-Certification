@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Listening Room | Music survey</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f6f2e8; color: #22261f; font: 1rem/1.5 "DM Sans", Arial, sans-serif; }
+    main { max-width: 66rem; margin: auto; padding: clamp(1rem, 5vw, 4rem); }
+    header { position: relative; overflow: hidden; isolation: isolate; background: #243e38; color: #fff6dd; padding: clamp(1.5rem, 5vw, 4rem); }
+    header::after { content: ""; position: absolute; z-index: -1; top: -3rem; right: -8rem; width: 23rem; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, #e7b674 0 3%, #b75034 3% 25%, transparent 25%), repeating-radial-gradient(circle, #102c27 0 4px, #385449 5px 6px); }
+    h1 { margin: 0; max-width: 7em; font: 500 clamp(3rem, 7vw, 5.5rem)/.98 "Instrument Serif", Georgia, serif; letter-spacing: -.055em; }
+    header p { max-width: 31rem; margin: 1.25rem 0 0; }
+    form { background: #fffdf7; border: 1px solid #cbc9bd; padding: clamp(1.25rem, 5vw, 3.5rem); }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
+    label, legend { font-weight: 600; }
+    .grid label, .comments { display: block; margin-bottom: .4rem; }
+    input, select, textarea, button { font: inherit; }
+    .grid input, select, textarea { width: 100%; border: 1px solid #888d80; border-radius: .35rem; background: #fff; color: inherit; padding: .7rem; }
+    fieldset { margin: 1.75rem 0; padding: 0; border: 0; }
+    legend { padding: 0; margin-bottom: .6rem; }
+    .choices { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .choices label { display: flex; align-items: center; gap: .5rem; padding: .5rem .9rem; border: 1px solid #b5bbad; border-radius: 2rem; font-weight: 400; cursor: pointer; }
+    .choices label:has(:checked) { background: #e1edda; border-color: #32664e; }
+    .choices input { margin: 0; accent-color: #285844; }
+    textarea { display: block; resize: vertical; }
+    button { margin-top: 1.5rem; padding: .8rem 1.6rem; background: #243e38; color: white; border: 0; border-radius: .35rem; cursor: pointer; }
+    button:hover { background: #365c50; }
+    :focus-visible { outline: 3px solid #ac5829; outline-offset: 3px; }
+    #status:not(:empty) { margin-top: 1rem; display: block; }
+    @media (max-width: 45rem) {
+      .grid { grid-template-columns: 1fr; }
+      header::after { width: 13rem; right: -8rem; top: -6rem; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1 id="title">Listening Room</h1>
+      <p id="description">Help pick the sound of our next listening session. Tell us what you play and which records we should bring.</p>
+    </header>
+    <form id="survey-form">
+      <div class="grid">
+        <div>
+          <label for="name" id="name-label">Name (required)</label>
+          <input type="text" id="name" name="name" autocomplete="name" placeholder="Your name" required>
+        </div>
+        <div>
+          <label for="email" id="email-label">Email (required)</label>
+          <input type="email" id="email" name="email" autocomplete="email" placeholder="you@example.com" required>
+        </div>
+        <div>
+          <label for="number" id="number-label">Albums played last week (0–100)</label>
+          <input type="number" id="number" name="albums" min="0" max="100" placeholder="For example, 3">
+        </div>
+        <div>
+          <label for="dropdown">Favorite listening format</label>
+          <select id="dropdown" name="format">
+            <option value="" disabled selected>Choose a format</option>
+            <option>Streaming</option>
+            <option>Vinyl</option>
+            <option>CD</option>
+            <option>Cassette</option>
+          </select>
+        </div>
+      </div>
+      <fieldset>
+        <legend>When would you join a session?</legend>
+        <div class="choices">
+          <label><input type="radio" name="session" value="morning"> Morning</label>
+          <label><input type="radio" name="session" value="afternoon"> Afternoon</label>
+          <label><input type="radio" name="session" value="evening"> Evening</label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Which genres should we play? Pick as many as you like.</legend>
+        <div class="choices">
+          <label><input type="checkbox" name="genre" value="jazz"> Jazz</label>
+          <label><input type="checkbox" name="genre" value="soul"> Soul</label>
+          <label><input type="checkbox" name="genre" value="gnawa"> Gnawa</label>
+          <label><input type="checkbox" name="genre" value="electronic"> Electronic</label>
+        </div>
+      </fieldset>
+      <label class="comments" for="comments">Any track requests or additional comments?</label>
+      <textarea id="comments" name="comments" rows="3" placeholder="Name a track and the artist, or leave us a note."></textarea>
+      <button type="submit" id="submit">Submit survey</button>
+      <output id="status" aria-live="polite"></output>
+    </form>
+  </main>
+  <script>
+    const form = document.getElementById("survey-form");
+    const statusMessage = document.getElementById("status");
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      statusMessage.textContent = "Thanks, " + form.elements.namedItem("name").value + "! Your demo response is complete.";
+    });
+    form.addEventListener("input", () => { statusMessage.textContent = ""; });
+  </script>
+</body>
+</html>

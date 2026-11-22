@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SQL field guide</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav id="navbar" aria-label="Guide sections">
+    <header><h1>SQL field guide</h1></header>
+    <a class="nav-link" href="#Create_a_table">Create a table</a>
+    <a class="nav-link" href="#Insert_rows">Insert rows</a>
+    <a class="nav-link" href="#Select_columns">Select columns</a>
+    <a class="nav-link" href="#Filter_rows">Filter rows</a>
+    <a class="nav-link" href="#Sort_results">Sort results</a>
+    <a class="nav-link" href="#Count_by_genre">Count by genre</a>
+  </nav>
+  <main id="main-doc">
+    <section class="main-section" id="Create_a_table">
+      <header><h2>Create a table</h2></header>
+      <p>A table stores records in rows. In this example, each row represents one book, and each column describes something about it.</p>
+      <pre><code>CREATE TABLE books (
+    id INTEGER PRIMARY KEY,
+    title TEXT NOT NULL,
+    genre TEXT NOT NULL,
+    pages INTEGER NOT NULL
+);</code></pre>
+      <p>Run these examples in order in a fresh SQLite database. The first statement creates the table that the other examples use.</p>
+      <ul>
+        <li>id identifies one book.</li>
+        <li>title holds the name printed on the cover.</li>
+        <li>genre groups similar books.</li>
+        <li>pages holds a whole-number page count.</li>
+      </ul>
+    </section>
+    <section class="main-section" id="Insert_rows">
+      <header><h2>Insert rows</h2></header>
+      <p>INSERT INTO adds records. List the columns first, then supply the values for each row in the same order.</p>
+      <pre><code>INSERT INTO books (title, genre, pages)
+VALUES
+    (&#x27;Night Train&#x27;, &#x27;Mystery&#x27;, 210),
+    (&#x27;Glass Garden&#x27;, &#x27;Fantasy&#x27;, 320),
+    (&#x27;Last Stop&#x27;, &#x27;Mystery&#x27;, 185);</code></pre>
+      <p>SQLite fills in the integer primary key when you omit it. After this statement, the table contains three books.</p>
+    </section>
+    <section class="main-section" id="Select_columns">
+      <header><h2>Select columns</h2></header>
+      <p>SELECT chooses the columns to show in the result. FROM names the table to read.</p>
+      <pre><code>SELECT title, pages
+FROM books;</code></pre>
+      <p>This query displays the title and page count for all three books. The stored rows keep all four columns.</p>
+    </section>
+    <section class="main-section" id="Filter_rows">
+      <header><h2>Filter rows</h2></header>
+      <p>WHERE keeps the rows that satisfy a condition. Put text values inside single quotes.</p>
+      <pre><code>SELECT title
+FROM books
+WHERE genre = &#x27;Mystery&#x27;;</code></pre>
+      <p>The example returns Night Train and Last Stop. Add another condition with AND when both conditions must hold.</p>
+    </section>
+    <section class="main-section" id="Sort_results">
+      <header><h2>Sort results</h2></header>
+      <p>ORDER BY arranges the returned rows. DESC puts the largest page count first, so Glass Garden appears at the top.</p>
+      <pre><code>SELECT title, pages
+FROM books
+ORDER BY pages DESC, id ASC
+LIMIT 2;</code></pre>
+      <p>LIMIT keeps only the first two rows after sorting. The second sort column makes the order predictable when page counts match.</p>
+      <ul>
+        <li>Use ASC for ascending order.</li>
+        <li>Use DESC for descending order.</li>
+      </ul>
+    </section>
+    <section class="main-section" id="Count_by_genre">
+      <header><h2>Count by genre</h2></header>
+      <p>GROUP BY collects rows with the same genre into a group. COUNT(*) counts the rows in each group.</p>
+      <pre><code>SELECT genre, COUNT(*) AS book_count
+FROM books
+GROUP BY genre
+ORDER BY genre;</code></pre>
+      <p>The result has two rows. Fantasy has one book and Mystery has two. The alias book_count gives the result column a readable name.</p>
+    </section>
+  </main>
+</body>
+</html>

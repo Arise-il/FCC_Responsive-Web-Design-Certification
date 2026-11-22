@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Short Reel | Animation film club</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header id="header">
+    <nav id="nav-bar" aria-label="Main navigation">
+      <a class="brand" href="#film">
+        <img id="header-img" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f39e.png" alt="" width="36" height="36">
+        Short Reel
+      </a>
+      <div class="links">
+        <a class="nav-link" href="#film">Featured film</a>
+        <a class="nav-link" href="#preview">Preview</a>
+        <a class="nav-link" href="#join">Join the club</a>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="feature">
+      <section id="film" aria-labelledby="film-title">
+        <p class="eyebrow">The animation film club</p>
+        <h1 id="film-title">Big Buck <i>Bunny.</i></h1>
+        <p class="synopsis">A giant rabbit wants a quiet day in the meadow. Three woodland bullies have other plans.</p>
+        <a class="button" href="#preview">Watch the preview <span aria-hidden="true">↘</span></a>
+      </section>
+      <section id="preview" aria-labelledby="preview-title">
+        <h2 id="preview-title">Screening room</h2>
+        <video id="video" src="https://www.w3schools.com/html/mov_bbb.mp4#t=0.1" controls playsinline preload="metadata" aria-label="Big Buck Bunny preview">
+          <a href="https://www.w3schools.com/html/mov_bbb.mp4">Open the film preview</a>
+        </video>
+        <p class="credit">Film by the Blender Foundation · <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a></p>
+      </section>
+    </div>
+    <section id="join" aria-labelledby="club-heading">
+      <div>
+        <h2 id="club-heading">Join Short Reel</h2>
+        <p>One short film in your inbox each Friday.</p>
+      </div>
+      <form id="form" action="https://www.freecodecamp.org/email-submit" method="get">
+        <label for="email">Email address</label>
+        <div class="fields">
+          <input id="email" type="email" name="email" autocomplete="email" placeholder="you@example.com" required>
+          <input id="submit" type="submit" value="Join the club">
+        </div>
+        <small>Demo signup via freeCodeCamp.</small>
+      </form>
+    </section>
+  </main>
+  <footer>Film frames icon by Twitter and contributors · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></footer>
+</body>
+</html>

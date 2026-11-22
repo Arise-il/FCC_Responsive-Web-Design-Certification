@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The opening hand</title>
+  <style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: clamp(32px, 8vw, 100px) 16px;
+  color: #fcf4da;
+  background-color: #173e34;
+  background-image: radial-gradient(ellipse at top, #315c49, transparent 75%);
+  font-family: "Instrument Serif", Georgia, serif;
+}
+h1 {
+  margin: 0 auto 40px;
+  text-align: center;
+  font-weight: 400;
+  font-size: clamp(44px, 7vw, 82px);
+  letter-spacing: -.045em;
+}
+#playing-cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.card {
+  width: 180px;
+  height: 256px;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  padding: 16px;
+  color: #24332a;
+  background: #fff9e8;
+  border: 1px solid #d1c9ad;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px #082b234d;
+}
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border: 1px solid #cabea2;
+  border-radius: 7px;
+  pointer-events: none;
+}
+.red { color: #a33531; }
+.left, .right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 26px;
+  line-height: 1;
+}
+.left { align-self: flex-start; }
+.middle {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 42px;
+  line-height: .96;
+}
+.right {
+  align-self: flex-end;
+  transform: rotate(180deg);
+}
+.ace .middle { font-size: 76px; }
+.pair { letter-spacing: .06em; }
+  </style>
+</head>
+<body>
+  <h1 id="hand-title">The opening hand</h1>
+  <main id="playing-cards" aria-labelledby="hand-title">
+    <div class="card ace" role="img" aria-label="Ace of spades">
+      <div class="left"><span>A</span><span>♠</span></div>
+      <div class="middle"><span>♠</span></div>
+      <div class="right"><span>A</span><span>♠</span></div>
+    </div>
+    <div class="card red" role="img" aria-label="Two of hearts">
+      <div class="left"><span>2</span><span>♥</span></div>
+      <div class="middle"><span>♥</span><span>♥</span></div>
+      <div class="right"><span>2</span><span>♥</span></div>
+    </div>
+    <div class="card" role="img" aria-label="Three of clubs">
+      <div class="left"><span>3</span><span>♣</span></div>
+      <div class="middle"><span>♣</span><span>♣</span><span>♣</span></div>
+      <div class="right"><span>3</span><span>♣</span></div>
+    </div>
+    <div class="card red" role="img" aria-label="Four of diamonds">
+      <div class="left"><span>4</span><span>♦</span></div>
+      <div class="middle"><span class="pair">♦♦</span><span class="pair">♦♦</span></div>
+      <div class="right"><span>4</span><span>♦</span></div>
+    </div>
+  </main>
+</body>
+</html>
